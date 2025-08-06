@@ -62,7 +62,6 @@ app.put('/posts/:id', async(req, res) =>{
 
     })
 
-
     app.get('/posts',async (req, res) => {
     const result = await prisma.post.findMany()
     res.json(result)

@@ -1,0 +1,34 @@
+1. npm i prisma -D
+2. npx prisma init
+3. add the db schema into the generated file prisma/shcema.prisma:
+    model Post {
+    id        Int     @id @default(autoincrement())
+    title     String
+    content   String?
+    published Boolean @default(false)
+    author    User?   @relation(fields: [authorId], references: [id])
+    authorId  Int?
+    }
+
+    model User {
+    id    Int     @id @default(autoincrement())
+    email String  @unique
+    name  String?
+    posts Post[]
+    }
+
+4. add your db connection to .env file
+5. migrate the schema to db: npx prisma migrate dev --name init
+6. import/use the client: 
+    const { PrismaClient } = require("./generated/prisma")
+    const prisma = new PrismaClient()
+7. create records in your db:
+    app.post(`/user`, async (req, res) => {
+    const { name, email} = req.body
+    const result = await prisma.user.create({
+        data: {
+        name, email
+        },
+    })
+    res.json(result)
+    })
