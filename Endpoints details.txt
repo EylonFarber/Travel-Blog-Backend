@@ -1,0 +1,6 @@
+Create the following endpoints for the posts resource:
+GET /posts: Retrieve all posts.
+GET /posts/:id: Retrieve a single post by ID.
+POST /posts: Create a new post.
+PUT /posts/:id: Update an existing post by ID.
+DELETE /posts/:id: Delete a post by ID.
